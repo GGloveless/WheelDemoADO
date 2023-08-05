@@ -22,5 +22,5 @@ steps:
     artifactFeed: 'mlgxmez'
 
 - script: |
-    python twine -m upload  -r mlgxmez --config-file $(PYPIRC_PATH) dist/*.whl
+    python -m twine upload -r "mlgxmez" --config-file $(PYPIRC_PATH) dist/*.whl
   displayName: 'Upload wheel package to Artifacts feed'
