@@ -11,6 +11,11 @@ pool:
 
 steps:
 - script: |
+    pip install pytest pytest-azurepipelines
+    pytest
+  displayName: 'Install and run pytest'
+
+- script: |
     pip install wheel
     pip install twine
   displayName: 'Installing libraries'
