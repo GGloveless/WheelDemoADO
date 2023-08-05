@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: |
+    pip install wheel
+    pip install twine
+  displayName: 'Installing libraries'
+  
+- script: |
+    python setup.py bdist_wheel
+- task: TwineAuthenticate@1
+  inputs:
+    artifactFeed: 'mlgxmez'
+
+- script: |
+    python twine -m upload  -r mlgxmez --config-file $(PYPIRC_PATH) dist/*.whl
+  displayName: 'Upload wheel package to Artifacts feed'
